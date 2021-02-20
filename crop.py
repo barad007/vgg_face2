@@ -4,15 +4,20 @@ from tqdm import tqdm
 from logger import Logger
 
 
+def read_annotacions(file_name):
+    with open(file_name) as file_in:
+        for _line in file_in:
+            yield _line
+
 def crop_faces(line, vggface_subdir_path, logger):
     if 'NAME_ID' not in line:
-        img_path, X, Y, W, H = line.strip("\n").replace("\"", "").split(",")
-        X, Y, W, H = int(X), int(Y), int(W), int(H)
+        img_path, x, y, w, h = line.strip("\n").replace("\"", "").split(",")
+        x, y, w, h = int(x), int(y), int(w), int(h)
         full_img_path = os.path.join(vggface_subdir_path, img_path + ".jpg")
         if os.path.exists(full_img_path):
             try:
                 img = Image.open(full_img_path)
-                im = img.crop((X, Y, X + W, Y + H))
+                im = img.crop((x, y, x + w, y + h))
                 im.save(full_img_path)
             except Exception as e:
                 error_m = f"{full_img_path} : {repr(e)}"
@@ -21,11 +26,6 @@ def crop_faces(line, vggface_subdir_path, logger):
             error_m = f"{full_img_path}"
             logger.error(msg=error_m)
 
-
-def read_annotacions(file_name):
-    with open(file_name) as file_in:
-        for _line in file_in:
-            yield _line
 
 
 if __name__ == "__main__":

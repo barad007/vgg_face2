@@ -1,10 +1,5 @@
 class Logger:
-    """The Logger object logs the activity of an extractor/matcher and writes debug info to file.
-
-    Args:
-        _logs: List of messages.
-        log_file_path: Path to the log file.
-    """
+    """The Logger object logs the activity of an extractor/matcher and writes debug info to file."""
 
     def __init__(self):
         self._logs = []
