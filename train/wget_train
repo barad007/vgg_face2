@@ -1,0 +1,9 @@
+#!/bin/bash
+
+###  Data comes from https://docs.qingcloud.com/product/ai/deeplearning/index
+###  Vggface2_train.tar.gz 	36G. Loosely cropped faces for training.
+
+URL="https://appcenter-deeplearning.sh1a.qingstor.com/dataset/vggface2/vggface2_train.tar.gz"
+
+echo $(date) 'Running wget..'
+wget "${URL}"
